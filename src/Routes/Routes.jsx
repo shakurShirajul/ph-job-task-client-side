@@ -9,6 +9,8 @@ import AdminRoute from "./AdminRoutes";
 import ManageUsers from "../Pages/Admin/ManageUsers/ManageUsers";
 import CreateLessons from "../Pages/Admin/CreateLessons/CreateLessons";
 import CreateVocabularies from "../Pages/Admin/CreateVocabularies/CreateVocabularies";
+import Tutorials from "../Pages/User/Tutorials/Tutorials";
+import ManageVocabularies from "../Pages/Admin/ManageVocabularies/ManageVocabularies";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +22,10 @@ const router = createBrowserRouter([
                 element: <Lessons />,
             },
             {
+                path: "/tutorials",
+                element: <Tutorials/>
+            },
+            {
                 path: "/login",
                 element: <Login />
             },
@@ -27,7 +33,7 @@ const router = createBrowserRouter([
                 path: "/register",
                 element: <Register />
             },
-          
+
         ],
 
     },
@@ -38,15 +44,19 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "createlessons",
-                element: <CreateLessons/>
+                element: <CreateLessons />
             },
             {
                 path: "manageusers",
-                element: <ManageUsers/>
+                element: <ManageUsers />
             },
             {
                 path: "createVocabularies",
-                element: <CreateVocabularies/>
+                element: <CreateVocabularies />
+            },
+            {
+                path: "managevocabularies",
+                element: <ManageVocabularies/>
             }
         ]
     }

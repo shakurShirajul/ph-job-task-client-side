@@ -20,6 +20,7 @@ const Admin = () => {
     const {user, logout} = useContext(AuthContext);
 
     const adminSide = <>
+        <li><NavLink to='/dashboard/adminprofile' className={({ isActive }) => isActive && activeButton}>Dashboard</NavLink></li>
         <li><NavLink to='/dashboard/adminprofile' className={({ isActive }) => isActive && activeButton}>Lessons</NavLink></li>
         <li><NavLink to='/dashboard/createlessons' className={({ isActive }) => isActive && activeButton}>Create Lessons</NavLink></li>
         <li><NavLink to='/dashboard/createvocabularies' className={({ isActive }) => isActive && activeButton}>Create Vocabularies</NavLink></li>

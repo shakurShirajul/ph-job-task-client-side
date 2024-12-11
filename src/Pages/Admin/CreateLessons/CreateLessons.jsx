@@ -12,13 +12,8 @@ const CreateLessons = () => {
         const form = event.target;
         const lesson_title = form.title.value;
         const lesson_number = form.number.value;
-
-        console.log("      ", user.user_email);
-
         const response = await axios.post(`http://localhost:5000/create-lesson`, { email: user.user_email, lesson_title, lesson_number }, { withCredentials: true, });
-
         console.log(response.data);
-
         console.log(lesson_title, lesson_number);
         refetch();
         form.reset();
@@ -40,6 +35,30 @@ const CreateLessons = () => {
         console.log(response.data);
         refetch();
     }
+
+    // Handle Edit Lesson Title
+    const handleEditLessonTitle = async (lesson_title, id) => {
+        const response = await axios.patch(`http://localhost:5000/edit-lesson?email=${user.user_email}`, { id, lesson_title }, { withCredentials: true, });
+        // console.log(response.data);
+        refetch();
+    }
+
+    // Handle Edit Lesson Number
+    const handleEditLessonNumber = async (lesson_number, id) => {
+        try {
+            const response = await axios.patch(
+                `http://localhost:5000/edit-lesson?email=${user.user_email}`,
+                { id, lesson_number },
+                { withCredentials: true }
+            );
+            console.log("Lesson updated successfully:", response.data);
+            refetch();
+        } catch (error) {
+            console.error("Failed to update lesson:", error.response?.data || error.message);
+        }
+    };
+
+
 
     return <>
         <div>
@@ -107,6 +126,8 @@ const CreateLessons = () => {
                                     <LessonsTable key={index}
                                         lesson={lesson}
                                         handleDeleteLesson={handleDeleteLesson}
+                                        handleEditLessonTitle={handleEditLessonTitle}
+                                        handleEditLessonNumber={handleEditLessonNumber}
                                     />
                                 ))}
                             </tbody>
