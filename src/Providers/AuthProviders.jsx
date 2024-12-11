@@ -9,7 +9,6 @@ export const AuthContext = createContext(null);
 const AuthProviders = ({ children }) => {
 
     const [user, setUser] = useState(null);
-    // const [currentUser, setCurrentUser] = useState(null);
     const [loader, setLoader] = useState(true);
 
     const register = (user_name, user_email, user_password) => {
@@ -19,15 +18,15 @@ const AuthProviders = ({ children }) => {
 
     const  login = async (user_email, user_password) => {
         setLoader(true);
-        console.log("here")
+        // console.log("here")
         try {
             const response = await axios.post('http://localhost:5000/login', { user_email, user_password }, { withCredentials: true });
             if (response.data.length !== 0) {
                 const token = await axios.post('http://localhost:5000/jwt', { email: response.data.userData.user_email }, { withCredentials: true });
-                console.log(token);
+                // console.log(token);
             }
-            console.log(response.data);
-            setUser(response.data);
+            // console.log(response.data);
+            setUser(response.data.userData);
             return true;
         } catch (error) {
             // errorToast("Credintials Doesn't Matched");
@@ -45,7 +44,7 @@ const AuthProviders = ({ children }) => {
         console.log("Useeffect", user);
         axios.post(`http://localhost:5000/validate-token`, {}, { withCredentials: true })
             .then((response) => {
-                setUser(response.data);
+                setUser(response.data[0]);
             })
             .catch((error) => { })
         setLoader(false);

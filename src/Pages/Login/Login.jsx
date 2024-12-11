@@ -5,7 +5,7 @@ import { AuthContext } from "../../Providers/AuthProviders";
 const Login = () => {
 
 
-    const {login} = useContext(AuthContext);
+    const { login, user } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleLoginForm = (event) => {
@@ -15,12 +15,16 @@ const Login = () => {
         const user_password = form.password.value;
         const response = login(user_email, user_password);
         if (response) {
-            // successToast("Login Successfull");
             setTimeout(() => {
-                navigate('/');
+                console.log("login shakur", user.user_role);
+                if (user.user_role === 'admin') {
+                    navigate('/dashboard')
+                } else if (user.user_role === 'user') {
+                    navigate('/');
+                }
             }, 1000)
         }
-        
+
     }
     return (
         <div className="h-screen">

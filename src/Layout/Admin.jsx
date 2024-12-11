@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import { AuthContext } from "../Providers/AuthProviders";
 
 const Admin = () => {
 
@@ -15,12 +17,13 @@ const Admin = () => {
     //     }
     // })
 
+    const {user, logout} = useContext(AuthContext);
 
     const adminSide = <>
         <li><NavLink to='/dashboard/adminprofile' className={({ isActive }) => isActive && activeButton}>Lessons</NavLink></li>
-        <li><NavLink to='/dashboard/managemember' className={({ isActive }) => isActive && activeButton}>Add Lessons</NavLink></li>
-        <li><NavLink to='/dashboard/makeannouncement' className={({ isActive }) => isActive && activeButton}>Add Vocabularies</NavLink></li>
-        <li><NavLink to='/dashboard/agreementrequest' className={({ isActive }) => isActive && activeButton}>ManageUsers</NavLink></li>
+        <li><NavLink to='/dashboard/createlessons' className={({ isActive }) => isActive && activeButton}>Create Lessons</NavLink></li>
+        <li><NavLink to='/dashboard/createvocabularies' className={({ isActive }) => isActive && activeButton}>Create Vocabularies</NavLink></li>
+        <li><NavLink to='/dashboard/manageusers' className={({ isActive }) => isActive && activeButton}>Manage Users</NavLink></li>
         <li><NavLink to='/dashboard/managecoupons' className={({ isActive }) => isActive && activeButton}>LessonManagement</NavLink></li>
         <li><NavLink to='/dashboard/managecoupons' className={({ isActive }) => isActive && activeButton}>Vocabulary Management</NavLink></li>
     </>
@@ -47,10 +50,7 @@ const Admin = () => {
                                 }
                                 <div className="divider"></div>
                                 <li>
-                                    <NavLink to='/'>
-                                        {/* <HomeIcon /> */}
-                                        Logout
-                                    </NavLink>
+                                   <button onClick={()=>{logout()}}>Logout</button>
                                 </li>
 
                             </ul>
