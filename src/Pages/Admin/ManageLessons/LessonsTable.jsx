@@ -128,7 +128,7 @@
 // };
 
 // export default LessonsTable;
-const LessonsTable = ({ lesson,handleDeleteLesson }) => {
+const LessonsTable = ({ lesson, handleDeleteLesson, handleEditLesson }) => {
     console.log("Here Gto", lesson);
     return <>
         <tr className="font-mulish">
@@ -136,8 +136,9 @@ const LessonsTable = ({ lesson,handleDeleteLesson }) => {
             <td>{lesson.lesson_number}</td>
             <td>{lesson.lesson_vocabularies.length}</td>
             <td>
-                <div>
-                    <button className="btn btn-error text-white" onClick={()=>{handleDeleteLesson(lesson._id)}}>Delete</button>
+                <div className="space-x-2">
+                    <button className="btn btn-primary border-none text-white" onClick={() => handleEditLesson(lesson)}>Edit</button>
+                    <button className="btn bg-red-600 border-none text-white" onClick={() => { handleDeleteLesson(lesson._id) }}>Delete</button>
                 </div>
             </td>
         </tr>

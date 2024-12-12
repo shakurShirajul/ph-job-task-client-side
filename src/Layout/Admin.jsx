@@ -9,22 +9,11 @@ import { IoLogOut } from "react-icons/io5";
 const Admin = () => {
 
     const activeButton = "bg-white font-semibold";
-    // const axiosSecure = useAxiosSecure();
-
-    // const { user } = useContext(AuthContext);
-
-    // const { data: role = [], isPending, isLoading } = useQuery({
-    //     queryKey: ['role'],
-    //     queryFn: async () => {
-    //         const res = await axiosSecure.get(`/users/role?email=${user.email}`, { withCredentials: true })
-    //         return res.data;
-    //     }
-    // })
 
     const { user, logout } = useContext(AuthContext);
 
     const adminSide = <>
-        <li><NavLink to='/dashboard/adminprofile' className={({ isActive }) => isActive && activeButton}><MdDashboard />Dashboard</NavLink></li>
+        <li><NavLink to='/dashboard' className={({ isActive }) => isActive && activeButton}><MdDashboard />Dashboard</NavLink></li>
         <li><NavLink to='/dashboard/adminprofile' className={({ isActive }) => isActive && activeButton}><MdPlayLesson />Lessons</NavLink></li>
         <li><NavLink to='/dashboard/createlessons' className={({ isActive }) => isActive && activeButton}><MdOutlinePlayLesson />Add Lessons</NavLink></li>
         <li><NavLink to='/dashboard/createvocabularies' className={({ isActive }) => isActive && activeButton}><TbVocabulary /> Add Vocabularies</NavLink></li>

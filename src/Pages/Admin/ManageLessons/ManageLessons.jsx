@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useRef, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { AuthContext } from "../../../Providers/AuthProviders";
 import axios from "axios";
@@ -9,8 +9,13 @@ import Swal from "sweetalert2";
 const ManageLessons = () => {
 
     const { user, successToast, errorToast } = useContext(AuthContext);
+    const [editLesson, setEditLesson] = useState(null);
 
-    const { data: lessons = [], refetch } = useQuery({
+    const editLessonModalRef = useRef(null);
+
+
+    // Get Lessons
+    const { data: lessons = [], isLoading, refetch } = useQuery({
         queryKey: ['lessons'],
         queryFn: async () => {
             const res = await axios.get(`http://localhost:5000/lessons?email=${user.user_email}`, { withCredentials: true });
@@ -18,6 +23,8 @@ const ManageLessons = () => {
         },
     })
 
+
+    // Delete Lesson
     const handleDeleteLesson = async (id) => {
         console.log(id);
         try {
@@ -38,7 +45,7 @@ const ManageLessons = () => {
                 icon: "success",
             });
             const response = await axios.delete(
-                `http://localhost:5000/delete-lesson?email=${user.user_email}&id=${id}`, {withCredentials: true});
+                `http://localhost:5000/delete-lesson?email=${user.user_email}&id=${id}`, { withCredentials: true });
 
             if (response.status === 200) {
                 successToast("Vocabulary deleted successfully.");
@@ -51,6 +58,54 @@ const ManageLessons = () => {
             errorToast("Failed to delete the vocabulary. Please try again.");
         }
     };
+
+    // Edit Lesson
+    const handleEditLesson = (lesson) => {
+        setEditLesson(lesson);
+        if (editLessonModalRef.current) {
+            editLessonModalRef.current.showModal();
+        }
+    }
+
+    // Handle Edit Form
+    const handleEditFormSubmit = async (event) => {
+        event.preventDefault();
+        const form = event.target;
+
+        const updateLesson = {
+            lesson_title: form.title.value || editLesson.lesson_title,
+            lesson_number: form.number.value || editLesson.lesson_number,
+        }
+
+        try {
+            const response = await axios.patch(`
+                http://localhost:5000/edit-lesson?email=${user.user_email}&id=${editLesson._id}`, updateLesson, {
+                withCredentials: true
+            });
+            if (response.status === 200) {
+                successToast("Lesson Updated Successfully");
+                refetch();
+                setEditLesson(null);
+                if (editLessonModalRef.current) {
+                    editLessonModalRef.current.close();
+                }
+            } else {
+                errorToast("Failed to update the Lesson. Please try again.");
+            }
+        } catch (error) {
+            console.error("Error updating Lesson:", error);
+            errorToast("An error occurred while updating the Lesson.");
+        }
+
+    }
+
+    if (isLoading) {
+        return (
+            <div className="h-screen flex justify-center items-center">
+                <span className="loading loading-dots loading-lg"></span>
+            </div>
+        );
+    }
 
     return <>
         <div>
@@ -72,7 +127,9 @@ const ManageLessons = () => {
                                 {
                                     lessons.map(lesson =>
                                         <LessonsTable key={lesson._id} lesson={lesson}
-                                        handleDeleteLesson={handleDeleteLesson} />
+                                            handleDeleteLesson={handleDeleteLesson}
+                                            handleEditLesson={handleEditLesson}
+                                        />
                                     )
                                 }
                             </tbody>
@@ -80,6 +137,52 @@ const ManageLessons = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Edit Modal */}
+            <dialog ref={editLessonModalRef} className="modal">
+                {
+                    editLesson && (
+                        <form onSubmit={handleEditFormSubmit} className="modal-box">
+                            <h3 className="font-bold text-lg">Edit Lesson</h3>
+                            <div className="form-control">
+                                <label>Lesson Name: </label>
+                                <input
+                                    type="text"
+                                    name="title"
+                                    placeholder="e.g.,'BasicGreetings'"
+                                    defaultValue={editLesson.lesson_title}
+                                    className="input input-bordered"
+                                />
+                            </div>
+                            <div className="form-control">
+                                <label htmlFor="">Lesson Number:</label>
+                                <input
+                                    type="text"
+                                    name="number"
+                                    placeholder="(e.g.,1,2,3)"
+                                    defaultValue={editLesson.lesson_number}
+                                    className="input input-bordered"
+                                />
+                            </div>
+                            <div className="modal-action">
+                                <button type="submit" className="btn btn-success border-none text-white text-md">
+                                    Save Changes
+                                </button>
+                                <button type="button"
+                                    onClick={() => {
+                                        setEditLesson(null);
+                                        if (editLessonModalRef.current) {
+                                            editLessonModalRef.current.close();
+                                        }
+                                    }}
+                                    className="btn bg-blue-600 border-none text-white text-md"
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    )}
+            </dialog>
             <ToastContainer />
         </div>
     </>

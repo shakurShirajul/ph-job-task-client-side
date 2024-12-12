@@ -1,4 +1,4 @@
-const VocabularyTable = ({ vocabulary, findLessonNumber, handleDeleteVocabulary }) => {
+const VocabularyTable = ({ vocabulary, findLessonNumber, handleDeleteVocabulary, handleEditVocabulary }) => {
     return (
         <tr className="font-mulish">
             <td>
@@ -18,8 +18,8 @@ const VocabularyTable = ({ vocabulary, findLessonNumber, handleDeleteVocabulary 
             </td>
             <td>
                 <div className="flex justify-start items-center gap-2">
-                    <button className="btn btn-info text-white">Edit</button>
-                    <button className="btn btn-error text-white" onClick={() => handleDeleteVocabulary(vocabulary._id)}>Delete</button>
+                    <button className="btn btn-primary border-none text-white" onClick={() => handleEditVocabulary(vocabulary)}>Edit</button>
+                    <button className="btn bg-red-600 border-none text-white" onClick={() => handleDeleteVocabulary(vocabulary._id)}>Delete</button>
                 </div>
             </td>
         </tr>

@@ -2,9 +2,10 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../Providers/AuthProviders";
 import { useQuery } from "@tanstack/react-query";
+import { ToastContainer } from "react-toastify";
 
 const CreateVocabularies = () => {
-    const { user } = useContext(AuthContext);
+    const { user, successToast, errorToast } = useContext(AuthContext);
     const [selectedLesson, setSelectedLesson] = useState("");
 
     const handleCreateVocabulariesForm = async (event) => {
@@ -29,14 +30,12 @@ const CreateVocabularies = () => {
                 },
                 { withCredentials: true }
             );
-
-            console.log("Response:", response.data);
-            alert("Vocabulary added successfully!");
+            successToast("Vocabulary added successfully.");
             form.reset();
             setSelectedLesson("");
         } catch (error) {
             console.error("Error creating vocabulary:", error);
-            alert("Failed to add vocabulary. Please try again.");
+            errorToast("Failed to add vocabulary. Please try again.");
         }
     };
 
@@ -138,6 +137,7 @@ const CreateVocabularies = () => {
                 </div>
 
             </div>
+            <ToastContainer />
         </div>
     );
 };

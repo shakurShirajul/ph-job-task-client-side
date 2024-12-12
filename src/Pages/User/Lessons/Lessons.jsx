@@ -25,7 +25,7 @@ const Lessons = () => {
         <div>
             <div className="max-w-7xl min-h-screen mx-auto font-ubuntu py-5">
                 <div className="">
-                    <div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
                         {
                             lessons.map((lesson, index) =>
                                 <LessonCard
