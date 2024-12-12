@@ -23,9 +23,7 @@ const ManageTutorials = () => {
             );
             toast.success("Tutorial added successfully!");
             form.reset(); 
-            console.log(response.data);
         } catch (error) {
-            console.error("Error adding tutorial:", error);
             const errorMessage = error.response?.data?.message || "Failed to add tutorial.";
             toast.error(errorMessage);
         } finally {

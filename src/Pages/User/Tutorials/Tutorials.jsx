@@ -12,7 +12,6 @@ const Tutorials = () => {
             return response.data;
         }
     })
-    console.log("---------------", tutorialsData);
     return (
         <div className="my-5">
             <div className='max-w-7xl mx-auto'>

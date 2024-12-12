@@ -81,9 +81,6 @@ const CreateLessons = () => {
             console.error("Failed to update lesson:", error.response?.data || error.message);
         }
     };
-
-
-
     return <>
         <div>
             <div>

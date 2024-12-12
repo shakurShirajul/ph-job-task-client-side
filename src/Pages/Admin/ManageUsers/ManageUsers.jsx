@@ -19,20 +19,16 @@ const ManageUsers = () => {
 
     // Update user role
     const updateUserRole = async (id, role) => {
-        console.log(id, role);
         const response = await axios.patch(`http://localhost:5000/update-role`, { email: user.user_email, id, role }, { withCredentials: true, });
-        console.log(response.data);
         refetch();
     }
 
 
     // Handle loading and error states
     if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
-    if (isError) {
-        return <div>Error: {error.message}</div>;
+        return <div className="h-screen flex justify-center items-center">
+            <span className="loading loading-dots loading-lg"></span>
+        </div>;
     }
 
     return (

@@ -64,7 +64,7 @@ const ManageVocabularies = () => {
                 errorToast("Failed to delete the vocabulary. Please try again.");
             }
         } catch (error) {
-            console.error("Error deleting the vocabulary:", error);
+            // console.error("Error deleting the vocabulary:", error);
             errorToast("An error occurred while deleting the vocabulary. Please try again later.");
         }
     };
@@ -108,7 +108,7 @@ const ManageVocabularies = () => {
                 errorToast("Failed to update the vocabulary. Please try again.");
             }
         } catch (error) {
-            console.error("Error updating vocabulary:", error);
+            // console.error("Error updating vocabulary:", error);
             errorToast("An error occurred while updating the vocabulary.");
         }
     };

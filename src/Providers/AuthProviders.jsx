@@ -3,7 +3,6 @@ import { createContext } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
-// import Cookies from 'js-cookie';
 export const AuthContext = createContext(null);
 
 const AuthProviders = ({ children }) => {
@@ -12,7 +11,6 @@ const AuthProviders = ({ children }) => {
     const [loader, setLoader] = useState(true);
 
     const register = (user_name, user_email, user_password, user_image) => {
-        console.log(user_image);
         setLoader(true);
         return axios.post('http://localhost:5000/register', { user_name, user_email, user_password, user_image })
     }
@@ -39,7 +37,6 @@ const AuthProviders = ({ children }) => {
     }
 
     useEffect(() => {
-        console.log("Useeffect", user);
         axios.post(`http://localhost:5000/validate-token`, {}, { withCredentials: true })
             .then((response) => {
                 setUser(response.data[0]);

@@ -34,7 +34,7 @@ const Login = () => {
             }, 1000);
 
         } catch (error) {
-            console.error("Error during login:", error);
+            // console.error("Error during login:", error);
             setIsLoading(false);
         }
     };

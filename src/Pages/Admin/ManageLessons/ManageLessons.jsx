@@ -26,7 +26,6 @@ const ManageLessons = () => {
 
     // Delete Lesson
     const handleDeleteLesson = async (id) => {
-        console.log(id);
         try {
 
             const result = await Swal.fire({

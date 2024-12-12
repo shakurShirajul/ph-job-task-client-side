@@ -13,7 +13,6 @@ import Tutorials from "../Pages/User/Tutorials/Tutorials";
 import ManageVocabularies from "../Pages/Admin/ManageVocabularies/ManageVocabularies";
 import ManageLessons from "../Pages/Admin/ManageLessons/ManageLessons";
 import PrivateRoute from "./PrivateRoute";
-import Dashboard from "../Pages/Admin/Dashboard/Dashboard";
 import LessonDetails from "../Pages/User/Lessons/LessonDetails";
 import ManageTutorials from "../Pages/Admin/ManageTutorials/ManageTutorials";
 
@@ -21,7 +20,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <User />,
-        errorElement: <PageNotFound />,
+        // errorElement: <PageNotFound />,
         children: [
             {
                 path: "/",
@@ -50,7 +49,7 @@ const router = createBrowserRouter([
     {
         path: "/dashboard",
         element: <AdminRoute><Admin /></AdminRoute>,
-        errorElement: <PageNotFound />,
+        // errorElement: <PageNotFound />,
         children: [
             {
                 path: "createlessons",
