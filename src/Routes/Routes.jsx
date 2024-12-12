@@ -11,6 +11,8 @@ import CreateLessons from "../Pages/Admin/CreateLessons/CreateLessons";
 import CreateVocabularies from "../Pages/Admin/CreateVocabularies/CreateVocabularies";
 import Tutorials from "../Pages/User/Tutorials/Tutorials";
 import ManageVocabularies from "../Pages/Admin/ManageVocabularies/ManageVocabularies";
+import ManageLessons from "../Pages/Admin/ManageLessons/ManageLessons";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -19,11 +21,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Lessons />,
+                element: <PrivateRoute><Lessons /></PrivateRoute>,
             },
             {
                 path: "/tutorials",
-                element: <Tutorials/>
+                element: <PrivateRoute><Tutorials/></PrivateRoute>
             },
             {
                 path: "/login",
@@ -40,7 +42,7 @@ const router = createBrowserRouter([
     {
         path: "/dashboard",
         element: <AdminRoute><Admin /></AdminRoute>,
-        errorElement: <PageNotFound />,
+        // errorElement: <PageNotFound />,
         children: [
             {
                 path: "createlessons",
@@ -57,6 +59,10 @@ const router = createBrowserRouter([
             {
                 path: "managevocabularies",
                 element: <ManageVocabularies/>
+            },
+            {
+                path: "managelessons",
+                element: <ManageLessons/>
             }
         ]
     }

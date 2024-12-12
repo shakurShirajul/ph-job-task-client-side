@@ -17,16 +17,16 @@ const Admin = () => {
     //     }
     // })
 
-    const {user, logout} = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
 
     const adminSide = <>
         <li><NavLink to='/dashboard/adminprofile' className={({ isActive }) => isActive && activeButton}>Dashboard</NavLink></li>
         <li><NavLink to='/dashboard/adminprofile' className={({ isActive }) => isActive && activeButton}>Lessons</NavLink></li>
-        <li><NavLink to='/dashboard/createlessons' className={({ isActive }) => isActive && activeButton}>Create Lessons</NavLink></li>
-        <li><NavLink to='/dashboard/createvocabularies' className={({ isActive }) => isActive && activeButton}>Create Vocabularies</NavLink></li>
+        <li><NavLink to='/dashboard/createlessons' className={({ isActive }) => isActive && activeButton}>Add Lessons</NavLink></li>
+        <li><NavLink to='/dashboard/createvocabularies' className={({ isActive }) => isActive && activeButton}>Add Vocabularies</NavLink></li>
         <li><NavLink to='/dashboard/manageusers' className={({ isActive }) => isActive && activeButton}>Manage Users</NavLink></li>
-        <li><NavLink to='/dashboard/managecoupons' className={({ isActive }) => isActive && activeButton}>LessonManagement</NavLink></li>
-        <li><NavLink to='/dashboard/managecoupons' className={({ isActive }) => isActive && activeButton}>Vocabulary Management</NavLink></li>
+        <li><NavLink to='/dashboard/managelessons' className={({ isActive }) => isActive && activeButton}>Lesson Mangement</NavLink></li>
+        <li><NavLink to='/dashboard/managevocabularies' className={({ isActive }) => isActive && activeButton}>Vocabulary Mangement</NavLink></li>
     </>
 
 
@@ -51,7 +51,7 @@ const Admin = () => {
                                 }
                                 <div className="divider"></div>
                                 <li>
-                                   <button onClick={()=>{logout()}}>Logout</button>
+                                    <button onClick={() => { logout() }}>Logout</button>
                                 </li>
 
                             </ul>
