@@ -15,11 +15,13 @@ import ManageLessons from "../Pages/Admin/ManageLessons/ManageLessons";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Pages/Admin/Dashboard/Dashboard";
 import LessonDetails from "../Pages/User/Lessons/LessonDetails";
+import ManageTutorials from "../Pages/Admin/ManageTutorials/ManageTutorials";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <User />,
+        errorElement: <PageNotFound />,
         children: [
             {
                 path: "/",
@@ -48,31 +50,31 @@ const router = createBrowserRouter([
     {
         path: "/dashboard",
         element: <AdminRoute><Admin /></AdminRoute>,
-        // errorElement: <PageNotFound />,
+        errorElement: <PageNotFound />,
         children: [
             {
-                path: "dashboard",
-                element: <Dashboard />
-            },
-            {
                 path: "createlessons",
-                element: <CreateLessons />
+                element: <AdminRoute><CreateLessons /></AdminRoute>
             },
             {
                 path: "manageusers",
-                element: <ManageUsers />
+                element: <AdminRoute><ManageUsers /></AdminRoute>
             },
             {
                 path: "createVocabularies",
-                element: <CreateVocabularies />
+                element: <AdminRoute><CreateVocabularies /></AdminRoute>
             },
             {
                 path: "managevocabularies",
-                element: <ManageVocabularies />
+                element: <AdminRoute><ManageVocabularies /></AdminRoute>
             },
             {
                 path: "managelessons",
-                element: <ManageLessons />
+                element: <AdminRoute><ManageLessons /></AdminRoute>
+            },
+            {
+                path: "managetutorials",
+                element: <AdminRoute><ManageTutorials /></AdminRoute>
             }
         ]
     }

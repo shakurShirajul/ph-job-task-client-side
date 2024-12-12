@@ -42,7 +42,7 @@ const Login = () => {
     useEffect(() => {
         if (user) {
             if (user.user_role === 'admin') {
-                navigate('/dashboard');
+                navigate('/dashboard/createlesson');
             } else if (user.user_role === 'user') {
                 navigate('/');
             }

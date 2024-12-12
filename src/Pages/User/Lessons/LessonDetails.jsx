@@ -1,31 +1,36 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Providers/AuthProviders";
+import ShowVocabulary from "./ShowVocabulary";
+import Confetti from "react-confetti";
 
 const LessonDetails = () => {
     const { user } = useContext(AuthContext);
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const [currentPage, setCurrentPage] = useState(0);
+    const [showConfetti, setShowConfetti] = useState(false);
+
     const itemsPerPage = 1;
 
     const { data: lessons = [], isLoading, refetch } = useQuery({
         queryKey: ["lessons"],
         queryFn: async () => {
-            const response = await axios.get(`http://localhost:5000/lessons?email=${user.user_email}`, { withCredentials: true })
+            const response = await axios.get(`http://localhost:5000/lessons?email=${user.user_email}`, { withCredentials: true });
             return response.data.lessons;
         }
-    })
+    });
 
     const { data: vocabularies = [] } = useQuery({
         queryKey: ["vocabularies"],
         queryFn: async () => {
-            const response = await axios.get(`http://localhost:5000/vocabularies?email=${user.user_email}`, { withCredentials: true })
+            const response = await axios.get(`http://localhost:5000/vocabularies?email=${user.user_email}`, { withCredentials: true });
             return response.data;
         }
-    })
+    });
 
     if (isLoading) {
         return (
@@ -41,14 +46,10 @@ const LessonDetails = () => {
         return <div>Lesson not found!</div>;
     }
 
-    // Filter vocabularies related to this lesson
     const selectedVocabularies = vocabularies?.filter(vocabulary => vocabulary.vocabulary_lesson.includes(id));
-
-    // Calculate the total number of pages
     const numberOfPages = Math.ceil(selectedVocabularies.length / itemsPerPage);
     const pages = [...Array(numberOfPages).keys()];
 
-    // Slice the vocabularies array to display only the items for the current page
     const vocabulariesToDisplay = selectedVocabularies.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
     useEffect(() => {
@@ -57,39 +58,43 @@ const LessonDetails = () => {
 
     const handlePageClick = (page) => {
         setCurrentPage(page);
-    }
+    };
 
     const handlePrevPage = () => {
         if (currentPage > 0) {
             setCurrentPage(currentPage - 1);
         }
-    }
+    };
 
     const handleNextPage = () => {
         if (currentPage < pages.length - 1) {
             setCurrentPage(currentPage + 1);
         }
-    }
+    };
+
+    const handleComplete = () => {
+        setShowConfetti(true);
+        setTimeout(() => {
+            navigate("/");
+        }, 3000); 
+    };
 
     return (
         <>
             <div>
+                {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
                 <div className="max-w-7xl mx-auto min-h-screen font-ubuntu">
                     <div className="my-5">
-                        <div>
-                            <h1 className="text-2xl font-semibold">Lesson Name: {lesson.lesson_title}</h1>
-                            <h1 className="text-2xl font-semibold">Lesson No: {lesson.lesson_number}</h1>
-                            <h1 className="text-xl">Total Vocabularies: {lesson.lesson_vocabularies.length}</h1>
-                        </div>
+                        <h1 className="text-2xl font-semibold">Lesson Name: {lesson.lesson_title}</h1>
+                        <h1 className="text-2xl font-semibold">Lesson No: {lesson.lesson_number}</h1>
+                        <h1 className="text-xl">Total Vocabularies: {lesson.lesson_vocabularies.length}</h1>
                     </div>
 
                     <div>
-                        <h2 className="text-lg font-semibold">Vocabularies:</h2>
                         {vocabulariesToDisplay.length > 0 ? (
                             <ul>
                                 {vocabulariesToDisplay.map((vocab, index) => (
-                                    
-                                    <li key={index}>{vocab.vocabulary_word}</li>
+                                    <ShowVocabulary key={vocab._id} vocab={vocab} index={index} />
                                 ))}
                             </ul>
                         ) : (
@@ -112,7 +117,7 @@ const LessonDetails = () => {
                                     type="radio"
                                     name="options"
                                     aria-label={page}
-                                    checked={currentPage === page ? 'checked' : undefined}
+                                    checked={currentPage === page ? "checked" : undefined}
                                 />
                             ))}
                             <button onClick={handleNextPage} type="button" className="btn btn-square">
@@ -122,10 +127,18 @@ const LessonDetails = () => {
                             </button>
                         </div>
                     </div>
+
+                    {currentPage === pages.length - 1 && (
+                        <div className="flex justify-center mt-5">
+                            <button onClick={handleComplete} className="btn btn-success text-white">
+                                Complete
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
 export default LessonDetails;

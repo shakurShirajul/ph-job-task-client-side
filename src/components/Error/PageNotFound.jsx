@@ -6,7 +6,7 @@ const PageNotFound = () => {
         <div className='w-screen h-screen font-roboto'>
             <div className='m-auto w-full h-full flex items-center justify-center'>
                 <div className='mx-5 md:mx-0 space-y-5'>
-                    <h1 className='flex gap-2 font-grotsk text-center font-medium text-4xl md:text-9xl'>404 Page Not Found</h1>
+                    <h1 className='flex gap-2 font-grotsk text-center font-medium text-2xl md:text-9xl'>404 Page Not Found</h1>
                     <div className='flex items-center justify-center'>
                         <Link to="/">
                             <button

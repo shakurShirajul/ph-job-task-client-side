@@ -3,7 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProviders";
 import { FaUserCog } from "react-icons/fa";
 import { TbVocabulary, TbVocabularyOff } from "react-icons/tb";
-import { MdDashboard, MdOutlinePlayLesson, MdPlayLesson, MdMenuOpen } from "react-icons/md";
+import { MdOutlinePlayLesson, MdPlayLesson, MdMenuOpen, MdSlowMotionVideo } from "react-icons/md";
 import { IoLogOut } from "react-icons/io5";
 
 const Admin = () => {
@@ -13,13 +13,12 @@ const Admin = () => {
     const { user, logout } = useContext(AuthContext);
 
     const adminSide = <>
-        <li><NavLink to='/dashboard' className={({ isActive }) => isActive && activeButton}><MdDashboard />Dashboard</NavLink></li>
-        <li><NavLink to='/dashboard/adminprofile' className={({ isActive }) => isActive && activeButton}><MdPlayLesson />Lessons</NavLink></li>
         <li><NavLink to='/dashboard/createlessons' className={({ isActive }) => isActive && activeButton}><MdOutlinePlayLesson />Add Lessons</NavLink></li>
         <li><NavLink to='/dashboard/createvocabularies' className={({ isActive }) => isActive && activeButton}><TbVocabulary /> Add Vocabularies</NavLink></li>
         <li><NavLink to='/dashboard/manageusers' className={({ isActive }) => isActive && activeButton}><FaUserCog /> Manage Users</NavLink></li>
         <li><NavLink to='/dashboard/managelessons' className={({ isActive }) => isActive && activeButton}><MdPlayLesson /> Lesson Mangement</NavLink></li>
         <li><NavLink to='/dashboard/managevocabularies' className={({ isActive }) => isActive && activeButton}><TbVocabularyOff /> Vocabulary Mangement</NavLink></li>
+        <li><NavLink to='/dashboard/managetutorials' className={({ isActive }) => isActive && activeButton}><MdSlowMotionVideo /> Tutorial Management</NavLink></li>
     </>
 
 
@@ -64,8 +63,6 @@ const Admin = () => {
                                             <button onClick={() => { logout() }}><IoLogOut />Logout</button>
                                         </li>
                                     </div>
-
-
                                 </ul>
                             </div>
                         </div>
