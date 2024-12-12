@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <User />,
-        errorElement: <PageNotFound />,
+        // errorElement: <PageNotFound />,
         children: [
             {
                 path: "/",
@@ -49,10 +49,10 @@ const router = createBrowserRouter([
     {
         path: "/dashboard",
         element: <AdminRoute><Admin /></AdminRoute>,
-        errorElement: <PageNotFound />,
+        // errorElement: <PageNotFound />,
         children: [
             {
-                path: "createlessons",
+                path: "createlesson",
                 element: <AdminRoute><CreateLessons /></AdminRoute>
             },
             {

@@ -13,7 +13,7 @@ const Admin = () => {
     const { user, logout } = useContext(AuthContext);
 
     const adminSide = <>
-        <li><NavLink to='/dashboard/createlessons' className={({ isActive }) => isActive && activeButton}><MdOutlinePlayLesson />Add Lessons</NavLink></li>
+        <li><NavLink to='/dashboard/createlesson' className={({ isActive }) => isActive && activeButton}><MdOutlinePlayLesson />Add Lessons</NavLink></li>
         <li><NavLink to='/dashboard/createvocabularies' className={({ isActive }) => isActive && activeButton}><TbVocabulary /> Add Vocabularies</NavLink></li>
         <li><NavLink to='/dashboard/manageusers' className={({ isActive }) => isActive && activeButton}><FaUserCog /> Manage Users</NavLink></li>
         <li><NavLink to='/dashboard/managelessons' className={({ isActive }) => isActive && activeButton}><MdPlayLesson /> Lesson Mangement</NavLink></li>
