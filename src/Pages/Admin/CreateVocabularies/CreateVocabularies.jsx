@@ -55,81 +55,89 @@ const CreateVocabularies = () => {
 
     return (
         <div>
-            <form onSubmit={handleCreateVocabulariesForm}>
+            <div>
                 <div className="space-y-5">
-                    <div className="space-y-3">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                            <label>
-                                <h1>Word:</h1>
-                                <input
-                                    type="text"
-                                    className="input input-bordered w-full focus:outline-none"
-                                    name="word"
-                                    placeholder='e.g., "こんにちは"'
-                                    required
-                                />
-                            </label>
-                            <label>
-                                <h1>Pronunciation:</h1>
-                                <input
-                                    type="text"
-                                    className="input input-bordered w-full focus:outline-none"
-                                    name="pronunciation"
-                                    placeholder='e.g., "Konnichiwa"'
-                                    required
-                                />
-                            </label>
-                            <label>
-                                <h1>Meaning:</h1>
-                                <input
-                                    type="text"
-                                    className="input input-bordered w-full focus:outline-none"
-                                    name="meaning"
-                                    placeholder='e.g., "Hello"'
-                                    required
-                                />
-                            </label>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            <label className="flex-1">
-                                <h1>When to Say:</h1>
-                                <input
-                                    type="text"
-                                    className="input input-bordered w-full focus:outline-none"
-                                    name="whenToSay"
-                                    placeholder='e.g., "Used for greeting"'
-                                    required
-                                />
-                            </label>
-                            <label className="flex-1">
-                                <h1>Lesson No:</h1>
-                                <select
-                                    className="input input-bordered focus:outline-none w-full"
-                                    value={selectedLesson}
-                                    onChange={(event) => setSelectedLesson(event.target.value)}
-                                    required
-                                >
-                                    <option disabled value="">
-                                        e.g., Lesson1
-                                    </option>
-                                    {lessons.map((lesson) => (
-                                        <option value={lesson._id} key={lesson._id}>
-                                            Lesson No {lesson.lesson_number}
-                                        </option>
-                                    ))}
-                                </select>
-                            </label>
-                        </div>
+                    <div>
+                        <h1 className="text-4xl font-bold">Add New Vocabulary</h1>
                     </div>
-                    <div className="flex justify-end">
-                        <input
-                            type="submit"
-                            value="Add New Vocabularies"
-                            className="btn btn-success text-white"
-                        />
-                    </div>
+                    <form onSubmit={handleCreateVocabulariesForm}>
+                        <div className="space-y-5">
+                            <div className="space-y-3">
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                                    <label>
+                                        <h1 className="font-semibold">Word:</h1>
+                                        <input
+                                            type="text"
+                                            className="input input-bordered w-full focus:outline-none"
+                                            name="word"
+                                            placeholder='e.g., "こんにちは"'
+                                            required
+                                        />
+                                    </label>
+                                    <label>
+                                        <h1 className="font-semibold">Pronunciation:</h1>
+                                        <input
+                                            type="text"
+                                            className="input input-bordered w-full focus:outline-none"
+                                            name="pronunciation"
+                                            placeholder='e.g., "Konnichiwa"'
+                                            required
+                                        />
+                                    </label>
+                                    <label>
+                                        <h1 className="font-semibold">Meaning:</h1>
+                                        <input
+                                            type="text"
+                                            className="input input-bordered w-full focus:outline-none"
+                                            name="meaning"
+                                            placeholder='e.g., "Hello"'
+                                            required
+                                        />
+                                    </label>
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <label className="flex-1">
+                                        <h1 className="font-semibold">When to Say:</h1>
+                                        <input
+                                            type="text"
+                                            className="input input-bordered w-full focus:outline-none"
+                                            name="whenToSay"
+                                            placeholder='e.g., "Used for greeting"'
+                                            required
+                                        />
+                                    </label>
+                                    <label className="flex-1">
+                                        <h1 className="font-semibold">Lesson No:</h1>
+                                        <select
+                                            className="input input-bordered focus:outline-none w-full"
+                                            value={selectedLesson}
+                                            onChange={(event) => setSelectedLesson(event.target.value)}
+                                            required
+                                        >
+                                            <option disabled value="">
+                                                e.g., Lesson1
+                                            </option>
+                                            {lessons.map((lesson) => (
+                                                <option value={lesson._id} key={lesson._id}>
+                                                    Lesson No {lesson.lesson_number}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="flex justify-end">
+                                <input
+                                    type="submit"
+                                    value="Add New Vocabularies"
+                                    className="btn btn-success text-base text-white"
+                                />
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+
+            </div>
         </div>
     );
 };

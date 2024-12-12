@@ -36,24 +36,29 @@ const ManageUsers = () => {
     }
 
     return (
-        <div className="font-mulish border rounded-xl">
-            <div className="overflow-x-auto">
-                <table className="table">
-                    <thead className="text-base">
-                        <tr>
-                            <th>Photo</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {users.map((user, index) => (
-                            <UsersTable key={index} user={user} updateUserRole={updateUserRole} />
-                        ))}
-                    </tbody>
-                </table>
+        <div className="font-mulish">
+            <div className="space-y-5">
+                <div>
+                    <h1 className="text-4xl font-bold ">Create New Lesson</h1>
+                </div>
+                <div className="overflow-x-auto border rounded-xl">
+                    <table className="table">
+                        <thead className="text-base">
+                            <tr>
+                                <th>Photo</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {users.map((user, index) => (
+                                <UsersTable key={index} user={user} updateUserRole={updateUserRole} />
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );

@@ -180,7 +180,7 @@ const CreateLessons = () => {
                                 </label>
                             </div>
                             <div className="flex justify-end">
-                                <input type="submit" value={"Create Lesson"} className="btn btn-success text-white" />
+                                <input type="submit" value={"Create Lesson"} className="btn btn-success text-base text-white" />
                             </div>
                         </div>
                     </form>

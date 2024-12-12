@@ -23,7 +23,6 @@ const AuthProviders = ({ children }) => {
             const response = await axios.post('http://localhost:5000/login', { user_email, user_password }, { withCredentials: true });
             if (response.data.length !== 0) {
                 const token = await axios.post('http://localhost:5000/jwt', { email: response.data.userData.user_email }, { withCredentials: true });
-                // console.log(token);
             }
             setUser(response.data.userData);
             return true;
