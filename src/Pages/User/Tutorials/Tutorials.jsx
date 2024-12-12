@@ -8,7 +8,7 @@ const Tutorials = () => {
     const { data: tutorialsData = [], isLoading } = useQuery({
         queryKey: ['tutorialsData'],
         queryFn: async () => {
-            const response = await axios.get(`http://localhost:5000/tutorials?email=${user.user_email}`, { withCredentials: true })
+            const response = await axios.get(`https://japanese-language-app.vercel.app/tutorials?email=${user.user_email}`, { withCredentials: true })
             return response.data;
         }
     })

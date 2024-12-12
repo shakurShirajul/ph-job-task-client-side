@@ -20,7 +20,7 @@ const CreateVocabularies = () => {
             const vocabulary_lessonId = selectedLesson;
 
             const response = await axios.post(
-                `http://localhost:5000/create-vocabulary?email=${user.user_email}`,
+                `https://japanese-language-app.vercel.app/create-vocabulary?email=${user.user_email}`,
                 {
                     vocabulary_word,
                     vocabulary_pronunciation,
@@ -43,7 +43,7 @@ const CreateVocabularies = () => {
     const { data: lessons = [], isLoading } = useQuery({
         queryKey: ["lessons"],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/lessons?email=${user.user_email}`, { withCredentials: true });
+            const res = await axios.get(`https://japanese-language-app.vercel.app/lessons?email=${user.user_email}`, { withCredentials: true });
             return res.data.lessons;
         },
     });

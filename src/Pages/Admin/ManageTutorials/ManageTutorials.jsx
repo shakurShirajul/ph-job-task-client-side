@@ -17,7 +17,7 @@ const ManageTutorials = () => {
         setIsLoading(true);
         try {
             const response = await axios.post(
-                `http://localhost:5000/add-tutorial?email=${user.user_email}`,
+                `https://japanese-language-app.vercel.app/add-tutorial?email=${user.user_email}`,
                 { tutorial_title, tutorial_link },
                 { withCredentials: true }
             );

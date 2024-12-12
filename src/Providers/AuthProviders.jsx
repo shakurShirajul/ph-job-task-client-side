@@ -12,15 +12,15 @@ const AuthProviders = ({ children }) => {
 
     const register = (user_name, user_email, user_password, user_image) => {
         setLoader(true);
-        return axios.post('http://localhost:5000/register', { user_name, user_email, user_password, user_image })
+        return axios.post('https://japanese-language-app.vercel.app/register', { user_name, user_email, user_password, user_image })
     }
 
     const login = async (user_email, user_password) => {
         setLoader(true);
         try {
-            const response = await axios.post('http://localhost:5000/login', { user_email, user_password }, { withCredentials: true });
+            const response = await axios.post('https://japanese-language-app.vercel.app/login', { user_email, user_password }, { withCredentials: true });
             if (response.data.length !== 0) {
-                const token = await axios.post('http://localhost:5000/jwt', { email: response.data.userData.user_email }, { withCredentials: true });
+                const token = await axios.post('https://japanese-language-app.vercel.app/jwt', { email: response.data.userData.user_email }, { withCredentials: true });
             }
             setUser(response.data.userData);
             return true;
@@ -33,11 +33,11 @@ const AuthProviders = ({ children }) => {
 
     const logout = () => {
         setUser(null);
-        axios.post(`http://localhost:5000/logout`, {}, { withCredentials: true })
+        axios.post(`https://japanese-language-app.vercel.app/logout`, {}, { withCredentials: true })
     }
 
     useEffect(() => {
-        axios.post(`http://localhost:5000/validate-token`, {}, { withCredentials: true })
+        axios.post(`https://japanese-language-app.vercel.app/validate-token`, {}, { withCredentials: true })
             .then((response) => {
                 setUser(response.data[0]);
             })

@@ -9,7 +9,7 @@ const Lessons = () => {
     const { data: lessons = [], isLoading } = useQuery({
         queryKey: ['lessons'],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/lessons?email=${user.user_email}`, { withCredentials: true });
+            const res = await axios.get(`https://japanese-language-app.vercel.app/lessons?email=${user.user_email}`, { withCredentials: true });
             return res.data.lessons;
         },
     })

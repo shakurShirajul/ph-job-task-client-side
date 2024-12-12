@@ -19,7 +19,7 @@ const LessonDetails = () => {
     const { data: lessons = [], isLoading, refetch } = useQuery({
         queryKey: ["lessons"],
         queryFn: async () => {
-            const response = await axios.get(`http://localhost:5000/lessons?email=${user.user_email}`, { withCredentials: true });
+            const response = await axios.get(`https://japanese-language-app.vercel.app/lessons?email=${user.user_email}`, { withCredentials: true });
             return response.data.lessons;
         }
     });
@@ -27,7 +27,7 @@ const LessonDetails = () => {
     const { data: vocabularies = [] } = useQuery({
         queryKey: ["vocabularies"],
         queryFn: async () => {
-            const response = await axios.get(`http://localhost:5000/vocabularies?email=${user.user_email}`, { withCredentials: true });
+            const response = await axios.get(`https://japanese-language-app.vercel.app/vocabularies?email=${user.user_email}`, { withCredentials: true });
             return response.data;
         }
     });

@@ -18,7 +18,7 @@ const ManageVocabularies = () => {
         queryKey: ["vocabularies"],
         queryFn: async () => {
             const response = await axios.get(
-                `http://localhost:5000/vocabularies?email=${user.user_email}`,
+                `https://japanese-language-app.vercel.app/vocabularies?email=${user.user_email}`,
                 { withCredentials: true }
             );
             return response.data;
@@ -30,7 +30,7 @@ const ManageVocabularies = () => {
         queryKey: ["lessons"],
         queryFn: async () => {
             const response = await axios.get(
-                `http://localhost:5000/lessons?email=${user.user_email}`,
+                `https://japanese-language-app.vercel.app/lessons?email=${user.user_email}`,
                 { withCredentials: true }
             );
             return response.data.lessons;
@@ -53,7 +53,7 @@ const ManageVocabularies = () => {
             if (!result.isConfirmed) return;
 
             const response = await axios.delete(
-                `http://localhost:5000/delete-vocabulary?id=${id}&email=${user?.user_email}`,
+                `https://japanese-language-app.vercel.app/delete-vocabulary?id=${id}&email=${user?.user_email}`,
                 { withCredentials: true }
             );
 
@@ -92,7 +92,7 @@ const ManageVocabularies = () => {
 
         try {
             const response = await axios.patch(
-                `http://localhost:5000/edit-vocabulary?email=${user.user_email}&id=${editVocabulary._id}`,
+                `https://japanese-language-app.vercel.app/edit-vocabulary?email=${user.user_email}&id=${editVocabulary._id}`,
                 updatedVocabulary,
                 { withCredentials: true }
             );

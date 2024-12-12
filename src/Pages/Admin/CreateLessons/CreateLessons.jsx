@@ -22,7 +22,7 @@ const CreateLessons = () => {
 
         try {
             const response = await axios.post(
-                `http://localhost:5000/create-lesson`,
+                `https://japanese-language-app.vercel.app/create-lesson`,
                 {
                     email: user.user_email,
                     lesson_title,
@@ -53,7 +53,7 @@ const CreateLessons = () => {
     const { data: lessons = [], isLoading, isError, error, refetch } = useQuery({
         queryKey: ['lessons', user?.user_email],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/lessons?email=${user?.user_email}`, {
+            const res = await axios.get(`https://japanese-language-app.vercel.app/lessons?email=${user?.user_email}`, {
                 withCredentials: true,
             });
             return res.data;
@@ -62,7 +62,7 @@ const CreateLessons = () => {
 
     // Handle Edit Lesson Title
     const handleEditLessonTitle = async (lesson_title, id) => {
-        const response = await axios.patch(`http://localhost:5000/edit-lesson?email=${user.user_email}`, { id, lesson_title }, { withCredentials: true, });
+        const response = await axios.patch(`https://japanese-language-app.vercel.app/edit-lesson?email=${user.user_email}`, { id, lesson_title }, { withCredentials: true, });
         // console.log(response.data);
         refetch();
     }
@@ -71,7 +71,7 @@ const CreateLessons = () => {
     const handleEditLessonNumber = async (lesson_number, id) => {
         try {
             const response = await axios.patch(
-                `http://localhost:5000/edit-lesson?email=${user.user_email}`,
+                `https://japanese-language-app.vercel.app/edit-lesson?email=${user.user_email}`,
                 { id, lesson_number },
                 { withCredentials: true }
             );

@@ -10,7 +10,7 @@ const ManageUsers = () => {
     const { data: users = [], isLoading, isError, error, refetch } = useQuery({
         queryKey: ['users', user?.user_email],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/users?email=${user?.user_email}`, {
+            const res = await axios.get(`https://japanese-language-app.vercel.app/users?email=${user?.user_email}`, {
                 withCredentials: true,
             });
             return res.data;
@@ -19,7 +19,7 @@ const ManageUsers = () => {
 
     // Update user role
     const updateUserRole = async (id, role) => {
-        const response = await axios.patch(`http://localhost:5000/update-role`, { email: user.user_email, id, role }, { withCredentials: true, });
+        const response = await axios.patch(`https://japanese-language-app.vercel.app/update-role`, { email: user.user_email, id, role }, { withCredentials: true, });
         refetch();
     }
 

@@ -11,7 +11,7 @@ const useAdmin = () => {
         enabled: !loading,
         queryFn: async () => {
             console.log("HERE I AM IS")
-            const res = await axios.get(`http://localhost:5000/users/checking?role=admin&email=${user.user_email}`,{ withCredentials: true });
+            const res = await axios.get(`https://japanese-language-app.vercel.app/users/checking?role=admin&email=${user.user_email}`,{ withCredentials: true });
             return res.data?.validation;
         }
     })

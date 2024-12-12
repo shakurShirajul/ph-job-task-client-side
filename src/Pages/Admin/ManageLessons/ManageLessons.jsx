@@ -18,7 +18,7 @@ const ManageLessons = () => {
     const { data: lessons = [], isLoading, refetch } = useQuery({
         queryKey: ['lessons'],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/lessons?email=${user.user_email}`, { withCredentials: true });
+            const res = await axios.get(`https://japanese-language-app.vercel.app/lessons?email=${user.user_email}`, { withCredentials: true });
             return res.data.lessons;
         },
     })
@@ -44,7 +44,7 @@ const ManageLessons = () => {
                 icon: "success",
             });
             const response = await axios.delete(
-                `http://localhost:5000/delete-lesson?email=${user.user_email}&id=${id}`, { withCredentials: true });
+                `https://japanese-language-app.vercel.app/delete-lesson?email=${user.user_email}&id=${id}`, { withCredentials: true });
 
             if (response.status === 200) {
                 successToast("Vocabulary deleted successfully.");
@@ -78,7 +78,7 @@ const ManageLessons = () => {
 
         try {
             const response = await axios.patch(`
-                http://localhost:5000/edit-lesson?email=${user.user_email}&id=${editLesson._id}`, updateLesson, {
+                https://japanese-language-app.vercel.app/edit-lesson?email=${user.user_email}&id=${editLesson._id}`, updateLesson, {
                 withCredentials: true
             });
             if (response.status === 200) {
