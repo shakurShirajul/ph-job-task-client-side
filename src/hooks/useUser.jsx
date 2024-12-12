@@ -10,7 +10,6 @@ const useUser = () => {
         queryKey: [user?.email, 'isUser'],
         enabled: !loading,
         queryFn: async () => {
-            console.log("HERE I AM IS")
             const res = await axios.get(`http://localhost:5000/users/checking?role=user&email=${user.user_email}`, { withCredentials: true });
             return res.data?.validation;
         }
